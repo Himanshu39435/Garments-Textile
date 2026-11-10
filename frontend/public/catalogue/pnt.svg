@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#eee6d6"/><stop offset="1" stop-color="#c5b18d"/></linearGradient></defs>
+  <rect width="900" height="1100" fill="url(#bg)"/><circle cx="720" cy="170" r="190" fill="#fff" opacity=".22"/>
+  <path d="M310 180h280l-22 150-40 40-28 560H430l-30-420-30 420H245l-28-560-40-40-22-150z" fill="#142b3b"/>
+  <path d="M310 180h280M400 370h70M350 405h170" fill="none" stroke="#b89a65" stroke-width="12"/>
+  <text x="54" y="1010" fill="#142b3b" font-family="Georgia" font-size="54">PNT</text><text x="58" y="1055" fill="#142b3b" font-family="Arial" font-size="20" letter-spacing="4">WHOLESALE COLLECTION</text>
+</svg>

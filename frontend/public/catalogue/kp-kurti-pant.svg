@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#eadcc9"/><stop offset="1" stop-color="#b6a48c"/></linearGradient></defs>
+  <rect width="900" height="1100" fill="url(#bg)"/><circle cx="730" cy="180" r="180" fill="#fff" opacity=".22"/>
+  <path d="M170 220h250l78 180-75 48-48-102v420H245V346l-48 102-75-48z" fill="#8f4960"/>
+  <path d="M510 235h210l-20 130-32 40-28 485h-85l-22-310-22 310h-85l-28-485-32-40-20-130z" fill="#142b3b"/>
+  <path d="M245 346l75 70 75-70M510 235h210M565 430h100" fill="none" stroke="#e9c579" stroke-width="12"/>
+  <text x="54" y="1010" fill="#142b3b" font-family="Georgia" font-size="54">KP</text><text x="58" y="1055" fill="#142b3b" font-family="Arial" font-size="20" letter-spacing="4">KURTI · PANT</text>
+</svg>

@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 1100">
+  <defs><linearGradient id="bg" x2="1" y2="1"><stop stop-color="#e6d9c2"/><stop offset="1" stop-color="#8a9ba6"/></linearGradient></defs>
+  <rect width="900" height="1100" fill="url(#bg)"/><circle cx="730" cy="240" r="210" fill="#fff" opacity=".2"/>
+  <path d="M90 280h180l55 150-58 40-38-88v475H118V382l-38 88-58-40z" fill="#8f4960"/>
+  <path d="M360 300h150l-18 105-18 25-18 427h-65l-17-320-18 320h-65l-18-427-18-25-18-105z" fill="#142b3b"/>
+  <path d="M610 155c65 35 128 70 180 130l-150 390-92-54 110-245c-45-30-78-55-104-90z" fill="#e7c9c0" stroke="#8f7647" stroke-width="10"/>
+  <path d="M90 280h180M360 300h150M650 250l115 55" fill="none" stroke="#e9c579" stroke-width="12"/>
+  <text x="54" y="1010" fill="#142b3b" font-family="Georgia" font-size="47">3 PIECE SET</text><text x="58" y="1055" fill="#142b3b" font-family="Arial" font-size="20" letter-spacing="4">KURTI · PNT · DUPATTA</text>
+</svg>

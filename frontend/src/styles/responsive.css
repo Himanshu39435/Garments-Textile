@@ -1,0 +1,4 @@
+/* Layout safety rules shared by every page. */
+html, body, #root { max-width: 100%; overflow-x: clip; }
+table { max-width: 100%; }
+.table-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
