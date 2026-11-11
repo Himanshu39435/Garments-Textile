@@ -44,6 +44,19 @@ app.get('/api/health', (_req, res) =>
   ApiResponse.ok(res, { status: 'ok', database: getDatabaseState(), uptime: process.uptime() }, 'NARANG TEXTILE API is running'),
 );
 
+app.use('/api', (_req, res, next) => {
+  const database = getDatabaseState();
+  if (database !== 'connected') {
+    res.set('Retry-After', '5');
+    return res.status(503).json({
+      success: false,
+      message: 'Database unavailable. Check the MongoDB connection and network access.',
+      details: { database },
+    });
+  }
+  return next();
+});
+
 // Feature routers are mounted here as each phase adds them.
 app.use('/api/newsletter', newsletterRoutes);
 app.use('/api/categories', categoryRoutes);
@@ -63,8 +76,18 @@ app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`API listening on http://localhost:${PORT}`));
 
-connectDatabase().catch((error) => {
-  console.error(`Database connection failed: ${error.message}`);
-  if (isProduction) process.exit(1);
-  console.warn('Continuing without a database (development only). Start MongoDB and restart the server.');
-});
+async function connectWithRetry() {
+  try {
+    await connectDatabase();
+  } catch (error) {
+    console.error(`Database connection failed: ${error.message}`);
+    if (isProduction) {
+      process.exit(1);
+      return;
+    }
+    console.warn('Continuing without a database (development only). Retrying in 5 seconds.');
+    setTimeout(connectWithRetry, 5000);
+  }
+}
+
+connectWithRetry();

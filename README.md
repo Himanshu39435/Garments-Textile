@@ -52,6 +52,8 @@ Open http://localhost:5173/design-system to confirm the frontend renders and rea
 
 **backend/.env**: `NODE_ENV`, `PORT`, `CLIENT_URL`, `MONGODB_URI`, `JWT_SECRET` (use a long random value; also keys the OTP hashes), `JWT_EXPIRES_IN`, `CLOUDINARY_CLOUD_NAME/API_KEY/API_SECRET`, `RAZORPAY_KEY_ID/KEY_SECRET`, `SMTP_HOST/PORT/USER/PASS`, `EMAIL_FROM`, `ADMIN_NAME/EMAIL/PASSWORD` (seed script only), optional `AUTH_RATE_LIMIT_MAX` and `OTP_RATE_LIMIT_MAX`.
 
+For MongoDB Atlas, add your current public IP under **Security → Network Access → IP Access List** and confirm the database user and password in `MONGODB_URI`. If the password contains reserved URI characters, URL-encode them. Restart the backend after changing `.env` or the Atlas access list. When the database is disconnected, `/api/health` still reports its state and other `/api` endpoints return `503` instead of waiting for database-operation timeouts.
+
 **frontend/.env**: optional `VITE_WHATSAPP_NUMBER` in international digits without `+` or spaces (for example `919876543210`). The floating WhatsApp support button uses the placeholder phone number until this is configured.
 
 Commerce rules (all optional; **defaults are placeholders, confirm them with your accountant**): `DEFAULT_GST_PERCENT` (5), `SHIPPING_FLAT_RATE` (500), `FREE_SHIPPING_THRESHOLD` (50000), `SELLER_STATE_CODE` (GST state code of your registration, decides CGST+SGST vs IGST), `BANK_ACCOUNT_NAME/ACCOUNT_NUMBER/IFSC/NAME` (shown for bank-transfer orders), `RAZORPAY_WEBHOOK_SECRET`.
@@ -96,6 +98,11 @@ All responses use `{ success, message, data, meta? }`. Errors use `{ success:fal
 | PUT | /api/admin/staff/:id/status | admin only | `{ isActive }`. A deactivated staff member is locked out on their next request. |
 | PUT | /api/admin/staff/:id/password | admin only | `{ newPassword }`. Signs the person out everywhere. |
 | GET | /api/admin/dashboard | admin only | Totals, this-month vs last-month, "needs attention" counts, orders by status, 12 months of sales, top products, sales by category, recent orders, low-stock list. |
+| GET | /api/admin/payments | admin only | Payment records from orders, with optional `method` and `status` filters. |
+| GET | /api/admin/reports | admin only | Paid-order sales report. Optional `from`, `to` (`YYYY-MM-DD`) and `groupBy` (`daily`, `weekly`, `monthly`) filters. |
+| GET/PUT | /api/admin/settings | admin only | Read / save Narang Textile brand, contact, shipping, invoice, policy and banner settings. These are stored in the admin panel and do not alter storefront or checkout behavior. |
+| GET/POST | /api/admin/coupons | admin only | List / create coupon codes with discount type, amount, minimum order, expiry and active status. |
+| PUT/DELETE | /api/admin/coupons/:id | admin only | Update / delete a coupon. Coupon management is admin-only and does not apply discounts at checkout. |
 | GET | /api/cart | customer | Priced cart `{ items, itemCount, hasIssues, totals }`. Optional `?addressId=` adds the CGST/SGST vs IGST split. |
 | POST | /api/cart/items | customer | `{ productId, quantity }` (whole metres). Adds to the existing quantity. MOQ and stock enforced. Prices are never accepted from the client. |
 | PUT | /api/cart/items/:productId | customer | `{ quantity }` sets the quantity. |
@@ -341,7 +348,7 @@ This table grows with every phase.
 - Product write APIs (create, edit, delete, image upload) arrive with the admin panel in Phase 8, behind admin authorization.
 - Catalogue search is a case-insensitive match on name, SKU, composition, fabric type and tags. If the catalogue grows past a few thousand products, switch to a MongoDB text or Atlas Search index.
 - Shipment details (courier, tracking number, shipped and delivered dates) and the processing/shipped/delivered statuses are set by the admin in Phase 8. Until then the tracking timeline shows placed and paid steps only.
-- The admin panel has Dashboard, Products, Categories, Orders and Customers. Inventory, reports and settings (Phase 10) are added the same way: a nav entry in `AdminLayout.jsx` and a route in `AdminRoutes.jsx`.
+- The admin panel has Dashboard, Products, Categories, Orders, Customers, Staff, Inventory/Stock, Payments, Coupons, Sales Reports and Website Settings. Coupon and website settings are admin-only and are not connected to the customer checkout/storefront.
 - Stock is edited directly on the product. A stock history (stock in, stock out, who and why) arrives in Phase 10.
 - Razorpay refunds are not automated: refund in the Razorpay dashboard (or by bank), then use "Record refund" on the order.
 - Image uploads to Cloudinary could not be tested live while building (no network access to Cloudinary). Test one upload with your keys before launch.
@@ -406,7 +413,7 @@ A person who opens another role's area (for example a customer visiting `/admin`
 - **Revenue** means money collected: paid, non-cancelled orders including GST and shipping. "Sales by category" and "Top products" use item value before GST and shipping.
 - **Months** are calendar months in Indian time (IST), so a sale at 1 am on the 1st lands in the right month. The chart covers the last 12 months, with empty months shown as zero.
 - **Month-over-month change** compares this month so far with all of last month, so it will look low early in the month. The card says so.
-- **Performance:** the 12-month breakdowns are computed in memory from paid orders, which is fine for a few thousand orders a year. For much larger volumes, move them to database aggregation or cached reports (Phase 10).
+- **Performance:** dashboard and filtered report breakdowns are computed in memory from paid orders. For much larger volumes, move them to database aggregation or cached reports.
 - **Charts** are in their own bundle, loaded only on admin pages, and have a "View as table" alternative for screen readers.
 
 ## Admin management notes

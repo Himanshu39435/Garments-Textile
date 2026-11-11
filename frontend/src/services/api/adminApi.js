@@ -4,6 +4,16 @@ const clean = (params = {}) => Object.fromEntries(Object.entries(params).filter(
 
 export const getAdminSession = () => apiClient.get('/admin/session');
 export const getAdminDashboard = () => apiClient.get('/admin/dashboard');
+export const listAdminPayments = (params) => apiClient.get('/admin/payments', { params: clean(params) });
+export const getAdminSalesReport = (params) => apiClient.get('/admin/reports', { params: clean(params) });
+export const getWebsiteSettings = () => apiClient.get('/admin/settings');
+export const saveWebsiteSettings = (payload) => apiClient.put('/admin/settings', payload);
+
+// Coupons
+export const listAdminCoupons = () => apiClient.get('/admin/coupons');
+export const createAdminCoupon = (payload) => apiClient.post('/admin/coupons', payload);
+export const updateAdminCoupon = (id, payload) => apiClient.put(`/admin/coupons/${id}`, payload);
+export const deleteAdminCoupon = (id) => apiClient.delete(`/admin/coupons/${id}`);
 
 /** Uploads one image file. Resolves { data: { url, publicId } }. */
 export const uploadImage = (file) => {

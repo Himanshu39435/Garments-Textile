@@ -7,8 +7,12 @@ import adminOrderRoutes from './AdminOrderRoutes.js';
 import adminProductRoutes from './AdminProductRoutes.js';
 import adminQuotationRoutes from './AdminQuotationRoutes.js';
 import adminStaffRoutes from './AdminStaffRoutes.js';
+import adminCouponRoutes from './AdminCouponRoutes.js';
 import { protect } from '../middleware/AuthMiddleware.js';
 import { requireAdmin, requireStaffOrAdmin } from '../middleware/RoleMiddleware.js';
+import { getSalesReport, getWebsiteSettings, listAdminPayments, saveWebsiteSettings } from '../controllers/AdminContentController.js';
+import { validateBody, validateQuery } from '../middleware/ValidationMiddleware.js';
+import { validateAdminPaymentQuery, validateReportQuery, validateWebsiteSettings } from '../validators/AdminContentValidator.js';
 
 /**
  * Back-office API, mounted at /api/admin. Access is decided here, per feature, and nothing is open by default:
@@ -20,7 +24,12 @@ const router = Router();
 router.use(protect);
 router.get('/session', requireAdmin, getAdminSession);
 router.get('/dashboard', requireAdmin, getDashboard);
+router.get('/payments', requireAdmin, validateQuery(validateAdminPaymentQuery), listAdminPayments);
+router.get('/reports', requireAdmin, validateQuery(validateReportQuery), getSalesReport);
+router.get('/settings', requireAdmin, getWebsiteSettings);
+router.put('/settings', requireAdmin, validateBody(validateWebsiteSettings), saveWebsiteSettings);
 router.post('/uploads/image', requireAdmin, uploadSingleImage, uploadImage);
+router.use('/coupons', requireAdmin, adminCouponRoutes);
 router.use('/categories', requireAdmin, adminCategoryRoutes);
 router.use('/staff', requireAdmin, adminStaffRoutes);
 router.use('/products', requireStaffOrAdmin, adminProductRoutes); // staff: read only
