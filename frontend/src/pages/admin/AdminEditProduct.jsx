@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
-import { message } from 'antd';
+import { App as AntdApp } from 'antd';
 import { ArrowLeft } from 'lucide-react';
 import usePageTitle from '@/hooks/usePageTitle';
 import ProductForm from '@/components/forms/ProductForm';
@@ -11,6 +11,7 @@ import { getAdminProduct, listAdminCategories, updateProduct } from '@/services/
 export default function AdminEditProduct() {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { message } = AntdApp.useApp();
   const [state, setState] = useState({ product: null, categories: null, error: '' });
   const [saving, setSaving] = useState(false);
   usePageTitle(state.product ? `Edit ${state.product.name}` : 'Edit product');

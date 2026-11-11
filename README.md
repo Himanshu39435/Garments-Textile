@@ -65,6 +65,8 @@ Quote values containing `#` or spaces (`ADMIN_PASSWORD="My#Pass word"`), or dote
 **Email setup:** OTP emails are always sent through SMTP; they are never printed to the backend console. Add valid SMTP credentials to `backend/.env` before testing registration or forgot-password locally. For Brevo, use `SMTP_HOST=smtp-relay.brevo.com`, `SMTP_PORT=587`, your Brevo SMTP login as `SMTP_USER`, the Brevo SMTP key (not the account password) as `SMTP_PASS` or `SMTP_PASSWORD`, and a verified sender as `EMAIL_FROM` or `SMTP_FROM`. `SMTP_SECURE` is optional and defaults according to the port (true for 465); set it to `false` for port 587. If SMTP is missing or invalid, the API returns an error instead of exposing an OTP in local logs. Non-OTP notification emails may still use the development console fallback.
 **frontend/.env**: `VITE_API_BASE_URL` (default `/api`), `VITE_RAZORPAY_KEY_ID` (public key id only). Secrets never go in the frontend.
 
+**Migrating local product images:** images uploaded before Cloudinary was configured are stored in `backend/uploads` and may have `http://localhost:5000/uploads/...` URLs in MongoDB. Configure valid `CLOUDINARY_*` variables in `backend/.env` and ensure it points to the intended database. Run `cd backend` then `npm run migrate:images` for a dry run. Back up the database and verify the target before applying changes with `npm run migrate:images -- --apply`. The migration uploads local image files to Cloudinary and replaces matching localhost URLs in product and category records. Keep the local uploads directory until the migration is verified.
+
 ## API documentation
 
 All responses use `{ success, message, data, meta? }`. Errors use `{ success:false, message, details }`.

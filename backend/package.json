@@ -8,6 +8,7 @@
     "start": "node server.js",
     "dev": "node --watch server.js",
     "seed:products": "node scripts/SeedProducts.js",
+    "migrate:images": "node scripts/MigrateLocalImages.js",
     "seed:admin": "node scripts/SeedAdmin.js",
     "seed:staff": "node scripts/SeedStaff.js"
   },

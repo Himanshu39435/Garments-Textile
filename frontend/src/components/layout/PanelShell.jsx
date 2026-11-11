@@ -20,7 +20,7 @@ export default function PanelShell({ panelName, homePath, links, contentId }) {
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[250px_1fr] bg-secondary">
       <a href={`#${contentId}`} className="sr-only focus:not-sr-only focus:absolute focus:z-[100] focus:bg-white focus:p-3">Skip to content</a>
-      <aside className="relative weave text-white lg:sticky lg:top-0 lg:h-screen lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain flex flex-wrap lg:flex-col items-center lg:items-stretch gap-x-2 gap-y-1 lg:gap-6 p-3 lg:p-5">
+      <aside className="sticky top-0 z-30 weave text-white lg:h-screen lg:max-h-screen lg:overflow-y-auto lg:overscroll-contain flex flex-wrap lg:flex-col items-center lg:items-stretch gap-x-2 gap-y-1 lg:gap-6 p-3 lg:p-5">
         <Link to={homePath} className="order-1 no-underline text-white shrink-0 lg:px-3 lg:pt-2">
           <span className="font-display text-lg lg:text-xl block text-white">{BRAND.name}</span>
           <span className="hidden lg:block text-sm text-white/60">{panelName}</span>

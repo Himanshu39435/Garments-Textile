@@ -12,7 +12,7 @@ export default function MobileNavDrawer({ open, onClose }) {
   const navigate = useNavigate();
   const link = 'block py-3 text-primary no-underline border-b border-line';
   return (
-    <Drawer open={open} onClose={onClose} placement="left" width={320} title={<span className="font-display text-primary">{BRAND.name}</span>}>
+    <Drawer open={open} onClose={onClose} placement="left" size={320} title={<span className="font-display text-primary">{BRAND.name}</span>}>
       <SearchBar onSearched={onClose} className="mb-4" />
       <nav aria-label="Mobile">
         <p className="mt-2 mb-0 text-sm font-semibold text-ink/60">Fabrics</p>

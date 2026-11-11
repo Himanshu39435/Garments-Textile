@@ -22,7 +22,7 @@ export default function CustomerLayout() {
   const signOut = () => { logout(); message.success('Signed out'); navigate('/login'); };
   return (
     <div className="min-h-screen lg:grid lg:grid-cols-[290px_1fr] bg-secondary">
-      <aside className="weave text-white lg:sticky lg:top-0 lg:h-screen lg:max-h-screen lg:overflow-y-auto p-4 md:p-5 flex flex-wrap lg:flex-col gap-3 lg:gap-8">
+      <aside className="sticky top-0 z-30 weave text-white lg:h-screen lg:max-h-screen lg:overflow-y-auto p-4 md:p-5 flex flex-wrap lg:flex-col gap-3 lg:gap-8">
         <Link to="/account" className="no-underline text-white px-3 py-2 shrink-0">
           <span className="font-display text-2xl block text-white">{BRAND.name}</span>
           <span className="text-sm text-white/65">My account</span>
