@@ -1,17 +1,22 @@
 import { createContext, useEffect, useMemo, useState } from 'react';
 import { listCategories } from '@/services/api/categoryApi';
-import { FABRIC_CATEGORY_DETAILS } from '@/utils/constants';
 
-export const CategoryContext = createContext({ categories: FABRIC_CATEGORY_DETAILS });
+export const CategoryContext = createContext({ categories: [] });
 
 /**
  * Categories for menus, footer and the home page, loaded once from the API so renames, new categories and hidden ones
- * made in the admin panel show up everywhere. Falls back to the built-in list while loading or if the API is unreachable.
+ * made in the admin panel show up everywhere. The Explore section waits for live categories instead of showing stale fallbacks.
  */
 export function CategoryProvider({ children }) {
-  const [categories, setCategories] = useState(FABRIC_CATEGORY_DETAILS);
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
-    listCategories().then((r) => { if (r.data.length) setCategories(r.data); }).catch(() => {});
+    let active = true;
+    listCategories()
+      .then((response) => {
+        if (active && Array.isArray(response.data) && response.data.length) setCategories(response.data);
+      })
+      .catch(() => {});
+    return () => { active = false; };
   }, []);
   const value = useMemo(() => ({ categories }), [categories]);
   return <CategoryContext.Provider value={value}>{children}</CategoryContext.Provider>;

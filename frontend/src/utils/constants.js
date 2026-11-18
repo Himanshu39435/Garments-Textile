@@ -27,11 +27,14 @@ export const ROLE_LABEL = { admin: 'Admin', staff: 'Staff', customer: 'Customer'
  * `swatch` drives the generated fabric texture until real photography is added.
  */
 export const FABRIC_CATEGORY_DETAILS = [
-  { slug: 'cotton', name: 'Cotton Fabrics', description: 'Voile, poplin and mulmul for everyday garments.', swatch: { type: 'cotton', color: '#E9E3D3', accent: '#B89A65' } },
-  { slug: 'printed', name: 'Printed Fabrics', description: 'Block, screen and digital prints in repeat lengths.', swatch: { type: 'printed', color: '#F3E8D0', accent: '#142B3B' } },
-  { slug: 'embroidered', name: 'Embroidered Fabrics', description: 'Schiffli and thread work on cotton and georgette.', swatch: { type: 'embroidered', color: '#F4F0E6', accent: '#B89A65' } },
-  { slug: 'linen', name: 'Linen Fabrics', description: 'Pure and washed linen with a natural slub.', swatch: { type: 'linen', color: '#CBBFA3', accent: '#8F7647' } },
-  { slug: 'blended', name: 'Blended Fabrics', description: 'Cotton-poly, linen-cotton and viscose blends.', swatch: { type: 'blended', color: '#8A9BA6', accent: '#142B3B' } },
+  { slug: 'pnt', name: 'PNT', description: 'Wholesale PNT manufactured with in-house cutting, stitching and finishing.', swatch: { type: 'cotton', color: '#CBBFA3', accent: '#8F7647' } },
+  { slug: 'kurti', name: 'Kurti', description: 'Wholesale Kurtis developed for repeat collections and retail-ready size mixes.', swatch: { type: 'printed', color: '#E7C9C0', accent: '#8F7647' } },
+  { slug: 'kp-kurti-pant', name: 'KP (Kurti Pant)', description: 'Coordinated two-piece wholesale set with one Kurti and matching Pant.', swatch: { type: 'printed', color: '#D7C6B4', accent: '#8F7647' } },
+  { slug: 'kurti-set', name: 'Kurti Set (3 Pcs)', description: 'Complete 3-piece set: Kurti, PNT and Dupatta, packed for wholesale dispatch.', swatch: { type: 'embroidered', color: '#F3E8D0', accent: '#B89A65' } },
+  { slug: 'co-ord-set', name: 'Co-ord Set', description: 'Coordinated wholesale sets with matching tops and bottoms for everyday and occasion collections.', swatch: { type: 'printed', color: '#D7C6B4', accent: '#8F7647' } },
+  { slug: 'frock', name: 'Frock', description: 'Comfortable and retail-ready frocks for seasonal and everyday wholesale collections.', swatch: { type: 'printed', color: '#E7C9C0', accent: '#8F7647' } },
+  { slug: 'cotton-collection', name: 'Cotton Collection', description: 'Breathable cotton wholesale styles for everyday collections.', swatch: { type: 'cotton', color: '#EFE9DA', accent: '#B89A65' } },
+  { slug: 'festive-collection', name: 'Festive Collection', description: 'Embroidered and occasion-ready styles for seasonal wholesale buying.', swatch: { type: 'embroidered', color: '#E7C9C0', accent: '#B89A65' } },
 ];
 
 export const FABRIC_CATEGORIES = FABRIC_CATEGORY_DETAILS.map((c) => c.name);
