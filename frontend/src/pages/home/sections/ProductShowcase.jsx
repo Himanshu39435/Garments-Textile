@@ -11,7 +11,7 @@ export default function ProductShowcase() {
   const { products, loading, error, refetch } = useProducts({ flag: tab, limit: 4, sort: 'popular' });
 
   return (
-    <section className="container-page pt-20">
+    <div className="pt-20">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <h2 className="text-3xl md:text-4xl">What buyers are ordering</h2>
         <Segmented value={tab} onChange={setTab} options={[{ label: 'Best sellers', value: 'best' }, { label: 'New arrivals', value: 'new' }]} />
@@ -22,6 +22,6 @@ export default function ProductShowcase() {
         <ProductGrid products={products} loading={loading} skeletonCount={4} emptyMessage="Our catalogue is being updated. Check back shortly." />
       )}
       <p className="mt-6 mb-0"><Link to="/products" className="text-primary font-semibold">Browse the full catalogue</Link></p>
-    </section>
+    </div>
   );
 }

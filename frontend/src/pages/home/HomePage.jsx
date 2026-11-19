@@ -3,7 +3,6 @@ import HeroSection from '@/pages/home/sections/HeroSection';
 import BusinessStats from '@/pages/home/sections/BusinessStats';
 import FeaturedCategories from '@/pages/home/sections/FeaturedCategories';
 import ManufacturingLines from '@/pages/home/sections/ManufacturingLines';
-import ProductShowcase from '@/pages/home/sections/ProductShowcase';
 import WhyChooseUs from '@/pages/home/sections/WhyChooseUs';
 import WholesaleSolutions from '@/pages/home/sections/WholesaleSolutions';
 import Testimonials from '@/pages/home/sections/Testimonials';
@@ -18,7 +17,6 @@ export default function HomePage() {
       <BusinessStats />
       <ManufacturingLines />
       <FeaturedCategories />
-      <ProductShowcase />
       <WhyChooseUs />
       <WholesaleSolutions />
       <Testimonials />

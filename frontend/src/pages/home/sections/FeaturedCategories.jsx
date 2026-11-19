@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import CategoryVisual from '@/components/common/CategoryVisual';
 import useCategoryList from '@/hooks/useCategoryList';
+import ProductShowcase from '@/pages/home/sections/ProductShowcase';
 
 export default function FeaturedCategories() {
   const categories = useCategoryList();
@@ -8,7 +9,6 @@ export default function FeaturedCategories() {
     <section className="container-page pt-20">
       <div className="flex flex-wrap items-end justify-between gap-4 mb-8">
         <h2 className="text-3xl md:text-4xl">Explore our collection</h2>
-        <Link to="/products" className="text-primary font-semibold">View wholesale products</Link>
       </div>
       <ul className="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 list-none m-0 p-0">
         {categories.map((c) => (
@@ -25,6 +25,7 @@ export default function FeaturedCategories() {
           </li>
         ))}
       </ul>
+      <ProductShowcase />
     </section>
   );
 }
